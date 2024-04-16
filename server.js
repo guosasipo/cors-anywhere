@@ -39,10 +39,11 @@ cors_proxy
       "cookie",
       "cookie2",
       // Strip Heroku-specific headers
-      "x-heroku-queue-wait-time",
-      "x-heroku-queue-depth",
-      "x-heroku-dynos-in-use",
       "x-request-start",
+      "x-request-id",
+      "via",
+      "connect-time",
+      "total-route-time",
     ],
     redirectSameOrigin: true,
     httpProxyOptions: {
@@ -74,10 +75,11 @@ cors_proxy_https
       "cookie",
       "cookie2",
       // Strip Heroku-specific headers
-      "x-heroku-queue-wait-time",
-      "x-heroku-queue-depth",
-      "x-heroku-dynos-in-use",
       "x-request-start",
+      "x-request-id",
+      "via",
+      "connect-time",
+      "total-route-time",
     ],
     redirectSameOrigin: true,
     httpProxyOptions: {
