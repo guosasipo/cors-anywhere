@@ -27,34 +27,6 @@ var checkRateLimit = require("./lib/rate-limit")(
   process.env.CORSANYWHERE_RATELIMIT
 );
 
-var cors_proxy = require("./lib/cors-anywhere");
-
-cors_proxy
-  .createServer({
-    originBlacklist: originBlacklist,
-    originWhitelist: originWhitelist,
-    requireHeader: [],
-    checkRateLimit: checkRateLimit,
-    removeHeaders: [
-      "cookie",
-      "cookie2",
-      // Strip Heroku-specific headers
-      "x-request-start",
-      "x-request-id",
-      "via",
-      "connect-time",
-      "total-route-time",
-    ],
-    redirectSameOrigin: true,
-    httpProxyOptions: {
-      // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
-      xfwd: false,
-    },
-  })
-  .listen(port, host, function () {
-    console.log("Running CORS Anywhere http :  " + host + ":" + port);
-  });
-
 var cors_proxy_https = require("./lib/cors-anywhere");
 
 cors_proxy_https
@@ -89,4 +61,32 @@ cors_proxy_https
   })
   .listen(port_https, host, function () {
     console.log("Running CORS Anywhere https " + host + ":" + port_https);
+  });
+
+var cors_proxy = require("./lib/cors-anywhere");
+
+cors_proxy
+  .createServer({
+    originBlacklist: originBlacklist,
+    originWhitelist: originWhitelist,
+    requireHeader: [],
+    checkRateLimit: checkRateLimit,
+    removeHeaders: [
+      "cookie",
+      "cookie2",
+      // Strip Heroku-specific headers
+      "x-request-start",
+      "x-request-id",
+      "via",
+      "connect-time",
+      "total-route-time",
+    ],
+    redirectSameOrigin: true,
+    httpProxyOptions: {
+      // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
+      xfwd: false,
+    },
+  })
+  .listen(port, host, function () {
+    console.log("Running CORS Anywhere http :  " + host + ":" + port);
   });
