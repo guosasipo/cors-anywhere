@@ -22,7 +22,7 @@ jobs:
     steps:
 
       - name: npm install
-        run: npm imstall
+        run: npm install
              node server.js
       
       - name: Login to Azure
